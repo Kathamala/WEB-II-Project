@@ -35,14 +35,17 @@ let UsersService = class UsersService {
             },
         ];
     }
-    async findOne(username) {
+    async findOneAuth(username) {
         return this.users.find(user => user.username === username);
     }
-    async create(createUserDto) {
+    findOne(id) {
+        return this.userModel.findById(id);
+    }
+    create(createUserDto) {
         const createdUser = new this.userModel(createUserDto);
         return createdUser.save();
     }
-    async findAll() {
+    findAll() {
         return this.userModel.find().exec();
     }
     update(id, updateUserDto) {

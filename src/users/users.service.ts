@@ -28,24 +28,25 @@ export class UsersService {
     },
   ];
 
-  async findOne(username: string): Promise<TUser | undefined> {
+  
+  async findOneAuth(username: string): Promise<TUser | undefined> {
     return this.users.find(user => user.username === username);
   }
 
-  //findOneId(id: string){
-  //  return this.userModel.findOne(id);
-  //}
+  findOne(id: string){
+    return this.userModel.findById(id);
+  }
 
-  async create(createUserDto: CreateUserDto): Promise<User> {
+  create(createUserDto: CreateUserDto) {
     const createdUser = new this.userModel(createUserDto);
     return createdUser.save();
   }
 
-  async findAll(): Promise<User[]> {
+  findAll() {
     return this.userModel.find().exec();
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
+  update(id: string, updateUserDto: UpdateUserDto) {
     return this.userModel.findByIdAndUpdate(
       {
         _id: id,
@@ -59,7 +60,7 @@ export class UsersService {
     ).exec();
   }
 
-  remove(id: number) {
+  remove(id: string) {
     return this.userModel.deleteOne({ _id: id }).exec();
   }
 }

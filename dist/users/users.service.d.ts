@@ -7,11 +7,20 @@ export declare class UsersService {
     private userModel;
     constructor(userModel: Model<UserDocument>);
     private readonly users;
-    findOne(username: string): Promise<TUser | undefined>;
-    create(createUserDto: CreateUserDto): Promise<User>;
-    findAll(): Promise<User[]>;
-    update(id: number, updateUserDto: UpdateUserDto): Promise<User & import("mongoose").Document<any, any, any> & {
+    findOneAuth(username: string): Promise<TUser | undefined>;
+    findOne(id: string): import("mongoose").Query<User & import("mongoose").Document<any, any, any> & {
+        _id: any;
+    }, User & import("mongoose").Document<any, any, any> & {
+        _id: any;
+    }, {}, UserDocument>;
+    create(createUserDto: CreateUserDto): Promise<User & import("mongoose").Document<any, any, any> & {
         _id: any;
     }>;
-    remove(id: number): Promise<import("mongodb").DeleteResult>;
+    findAll(): Promise<(User & import("mongoose").Document<any, any, any> & {
+        _id: any;
+    })[]>;
+    update(id: string, updateUserDto: UpdateUserDto): Promise<User & import("mongoose").Document<any, any, any> & {
+        _id: any;
+    }>;
+    remove(id: string): Promise<import("mongodb").DeleteResult>;
 }

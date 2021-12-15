@@ -30,7 +30,7 @@ let AuthService = class AuthService {
         this.jwtService = jwtService;
     }
     async validateUser(username, pass) {
-        const user = await this.usersService.findOne(username);
+        const user = await this.usersService.findOneAuth(username);
         if (user && user.password === pass) {
             const { password } = user, result = __rest(user, ["password"]);
             return result;

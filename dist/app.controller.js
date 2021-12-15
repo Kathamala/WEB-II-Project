@@ -22,9 +22,13 @@ let AppController = class AppController {
         this.authService = authService;
     }
     async login(req) {
+        console.log("You asked for auth/login");
+        console.log(req.user);
         return this.authService.login(req.user);
     }
     getProfile(req) {
+        console.log("You asked for profile");
+        console.log(req.user);
         return req.user;
     }
 };

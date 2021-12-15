@@ -18,7 +18,7 @@ let AppModule = class AppModule {
 AppModule = __decorate([
     (0, common_1.Module)({
         imports: [users_module_1.UsersModule, auth_module_1.AuthModule,
-            mongoose_1.MongooseModule.forRoot('mongodb://localhost/nest')],
+            mongoose_1.MongooseModule.forRoot('mongodb+srv://jupaka:Je3ysZzUmC8iyzn@cluster0.b0wav.mongodb.net/Cluster0?retryWrites=true&w=majority')],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
     })
