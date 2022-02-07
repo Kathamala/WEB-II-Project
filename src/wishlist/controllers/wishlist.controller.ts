@@ -6,41 +6,46 @@ import { WishlistService } from '../services/wishlist.service';
 export class WishlistController {
   constructor(private readonly wishlistService: WishlistService) {}
 
-  // @UseGuards(JwtAuthGuard)
+  @UseGuards(JwtAuthGuard)
   @Patch()
   async addMovie(@Request() req) {
-    console.log(req.body.movie);
-    console.log("ADD MOVIE");
+    //console.log(req.body.movie);
+    //console.log("ADD MOVIE");
 
     return this.wishlistService.addMovie(
-      '620132c1bc5fcc15e8c0e3c7',
+      //'620132c1bc5fcc15e8c0e3c7',
+      req.user.userId,
       req.body.movie,
     );
   }
 
+  @UseGuards(JwtAuthGuard)
   @Get()
   async listMovies(@Request() req) {
-    console.log("LIST MOVIES")
+    //console.log("LIST MOVIES")
 
     if(req.body.orderby) console.log("orderby: " + req.body.orderby);
     if(req.body.filterby) console.log("filterby: " + req.body.filterby);
     if(req.body.filteroption) console.log("filterby: " + req.body.filteroption);
 
     return this.wishlistService.listMovies(
-      '620132c1bc5fcc15e8c0e3c7',
+      //'620132c1bc5fcc15e8c0e3c7',
+      req.user.userId,
       req.body.orderby,
       req.body.filterby,
       req.body.filteroption
     );
   }
 
+  @UseGuards(JwtAuthGuard)
   @Delete()
   async deleteMovie(@Request() req) {
-    console.log(req.body.movie);
-    console.log("DELETE MOVIE");
+    //console.log(req.body.movie);
+    //console.log("DELETE MOVIE");
 
     return this.wishlistService.deleteMovie(
-      '620132c1bc5fcc15e8c0e3c7',
+      //'620132c1bc5fcc15e8c0e3c7',
+      req.user.userId,
       req.body.movie
     );
   }  
