@@ -24,11 +24,13 @@ export class WishlistController {
 
     if(req.body.orderby) console.log("orderby: " + req.body.orderby);
     if(req.body.filterby) console.log("filterby: " + req.body.filterby);
+    if(req.body.filteroption) console.log("filterby: " + req.body.filteroption);
 
     return this.wishlistService.listMovies(
       '620132c1bc5fcc15e8c0e3c7',
       req.body.orderby,
-      req.body.filterby
+      req.body.filterby,
+      req.body.filteroption
     );
   }
 

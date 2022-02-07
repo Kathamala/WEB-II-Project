@@ -16,6 +16,8 @@ export class WishlistService {
   async addMovie(userId: string, movieName: string) {
     // fetch movie from omdbapi
 
+    if(movieName == null || movieName == '') return;
+
     const movieInfo = await this.fetchMovie(movieName);
 
     const data = await firstValueFrom(
@@ -37,7 +39,7 @@ export class WishlistService {
     };
   }
 
-  async listMovies(userId: string, orderby: string, filterby: string) {
+  async listMovies(userId: string, orderby: string, filterby: string, filteroption: string) {
     const wishlist = await this.wishlistModel.findById(userId);
     var movies: string[] = [];
     //var moviesNames: string[] = [];
@@ -86,16 +88,22 @@ export class WishlistService {
       );
     }   
            
-    /*
-    for(const movie of movies){
-      moviesNames.push(movie['Title']);
-    }*/
+    //FILTER BY:
+
+    if(filterby == 'region'){
+      return movies.filter(element => element['Country'].includes(filteroption));
+    }
+    else if(filterby == 'director'){
+      return movies.filter(element => element['Director'].includes(filteroption));
+    }
 
     return movies;
   }
 
   async deleteMovie(userId: string, movieName: string) {
     // fetch movie from omdbapi
+    if(movieName == null || movieName == '') return;
+    
     const movieInfo = await this.fetchMovie(movieName);
 
     const data = await firstValueFrom(
