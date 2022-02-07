@@ -1,4 +1,4 @@
-import { Controller, Patch, Request, UseGuards } from '@nestjs/common';
+import { Controller, Delete, Get, Patch, Request, UseGuards } from '@nestjs/common';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { WishlistService } from '../services/wishlist.service';
 
@@ -10,10 +10,36 @@ export class WishlistController {
   @Patch()
   async addMovie(@Request() req) {
     console.log(req.body.movie);
+    console.log("ADD MOVIE");
 
     return this.wishlistService.addMovie(
-      '620008a80e0ab7f5e57b2255',
+      '620132c1bc5fcc15e8c0e3c7',
       req.body.movie,
     );
   }
+
+  @Get()
+  async listMovies(@Request() req) {
+    console.log("LIST MOVIES")
+
+    if(req.body.orderby) console.log("orderby: " + req.body.orderby);
+    if(req.body.filterby) console.log("filterby: " + req.body.filterby);
+
+    return this.wishlistService.listMovies(
+      '620132c1bc5fcc15e8c0e3c7',
+      req.body.orderby,
+      req.body.filterby
+    );
+  }
+
+  @Delete()
+  async deleteMovie(@Request() req) {
+    console.log(req.body.movie);
+    console.log("DELETE MOVIE");
+
+    return this.wishlistService.deleteMovie(
+      '620132c1bc5fcc15e8c0e3c7',
+      req.body.movie
+    );
+  }  
 }
